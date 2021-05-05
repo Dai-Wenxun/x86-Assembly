@@ -1,0 +1,53 @@
+mov ax, 0xb800
+mov es, ax
+
+mov byte [es:0x00], 'z'
+mov byte [es:0x01], 0x07
+mov byte [es:0x02], 's'
+mov byte [es:0x03], 0x07
+mov byte [es:0x04], 'y'
+mov byte [es:0x05], 0x07
+
+mov ax, cs
+mov ds, ax
+
+mov ax, 521
+mov bh, 10
+div bh
+
+mov [0x7c00+number+0x00], ah
+
+xor ah, ah
+div bh
+mov [0x7c00+number+0x01], ah
+
+
+xor ah, ah
+div bh
+mov [0x7c00+number+0x02], ah
+
+
+
+mov al, [0x7c00+number+0x02]
+add al, 0x30
+mov [es:0x06], al
+mov byte [es:0x07], 0x07
+
+mov al, [0x7c00+number+0x01]
+add al, 0x30
+mov [es:0x08], al
+mov byte [es:0x09], 0x07
+
+mov al, [0x7c00+number+0x00]
+add al, 0x30
+mov [es:0x0a], al
+mov byte [es:0x0b], 0x07
+
+
+number db 0, 0, 0
+
+
+times 390 db 0x0
+
+
+db 0x55, 0xAA
