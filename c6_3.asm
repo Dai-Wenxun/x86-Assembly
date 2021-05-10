@@ -5,10 +5,15 @@ tst:
     jmp near $
 
 start:
-    mov al, 0x08
+    mov al, 0x07
     cmp al, 0x07
-    ; je tst
-    jne tst
+    ; je tst ; ZF = 1
+    ; jne tst ; ZF = 0
+    
+    jg tst ; ZF = 0 SF = OF
+    ; jge tst ; SF = OF
+
+
 
 
 
