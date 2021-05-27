@@ -18,6 +18,11 @@ mov ax, 0xb800
 mov es, ax
 mov di, 0
 
+; 隐含寻址
+; mov ax, 100
+; mov bl, 10
+; div bl
+
 ; 立即寻址
 ; mov ax, 0x38
 
@@ -51,7 +56,27 @@ mov di, 0
 ; jmp far [jump_far]
 
 
+; 基址寻址 bx->ds bp->ss
+; mov bx, 0x10
+; mov ax, [jump_dst]
+; mov [bx+6], ax
 
+
+; 变址寻址
+; 基址变址寻址(bx代替0x10)
+; mov cx, 3
+; xor ax, ax
+; .f:
+;     add ax, [0x10+si]
+;     add si, 2 
+;     loop .f
+
+; xor ax, 0x8400
+
+; 堆栈寻址
+
+; push word [jump_dst]
+; pop ax
 
 
 mov bl, 10
