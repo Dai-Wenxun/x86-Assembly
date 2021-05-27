@@ -3,6 +3,7 @@ SECTION header align=16
 
 SECTION data align=16
     jump_dst dw 0x7c00
+    jump_far dw 0x0000, 0xffff
 
 SECTION code align=16, vstart=0
 
@@ -10,6 +11,7 @@ xor ax, ax
 mov ss, ax
 mov sp, ax
 
+mov ax, 0x7c0
 mov ds, ax
 
 mov ax, 0xb800
@@ -29,15 +31,26 @@ mov di, 0
 ; 相对寻址
 
 ; 相对短转移
-; jmp tail 
+; jmp short tail 
 
-; 16位间接绝对近转移
+; 16位相对近转移
+; jmp near tail
+
+; 16位间接绝对近转移(只覆盖IP)
 ; (1)
-mov ax, 0x7c02 
-jmp ax
-; ;(2)
+; mov ax, 0x7c20
+; jmp ax
 
+;(2)
 ; jmp [jump_dst]
+
+; 16位直接绝对远转移(CS、IP同时覆盖)
+; jmp 0xFFFF:0x0000
+
+; 16位间接绝对远转移(CS、IP同时覆盖)
+; jmp far [jump_far]
+
+
 
 
 
