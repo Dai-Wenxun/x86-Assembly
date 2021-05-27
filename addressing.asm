@@ -4,7 +4,7 @@ SECTION header align=16
 SECTION data align=16
     jump_dst dw 0x7c00
 
-SECTION code align=16
+SECTION code align=16, vstart=0
 
 xor ax, ax
 mov ss, ax
@@ -32,12 +32,12 @@ mov di, 0
 ; jmp tail 
 
 ; 16位间接绝对近转移
-;(1)
-; mov ax, 0x7c02 
-; jmp ax
-;(2)
+; (1)
+mov ax, 0x7c02 
+jmp ax
+; ;(2)
 
-jmp [jump_dst]
+; jmp [jump_dst]
 
 
 
@@ -66,8 +66,9 @@ show:
     ret
 
 tail:
+
 mov ax, $
 
-times 510-($-$$) db 0
+times 510-32-($-$$) db 0
     db 0x55, 0xaa
 
