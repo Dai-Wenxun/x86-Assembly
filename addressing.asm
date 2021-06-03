@@ -11,10 +11,10 @@ xor ax, ax
 mov ss, ax
 mov sp, ax
 
-mov ax, 0x7c0
+mov ax, [0x1]
 mov ds, ax
 
-mov ax, 0xb800
+mov bx, 0xb800
 mov es, ax
 mov di, 0
 
@@ -47,7 +47,7 @@ mov di, 0
 ; jmp ax
 
 ;(2)
-; jmp [jump_dst]
+; jmp [jump_far]
 
 ; 16位直接绝对远转移(CS、IP同时覆盖)
 ; jmp 0xFFFF:0x0000
